@@ -1,0 +1,24 @@
+.custom-container {
+    max-width: 1920px;
+}
+
+.check-icon {
+    color: #7239ea;
+    font-size: 22px;
+}
+
+.cross-icon {
+    color: #dc3545;
+    font-size: 22px;
+}
+
+/**
+* These are import and export buttons hidden temporary
+*/
+/*button.btn.btn-primary {*/
+/*    display: none;*/
+/*}*/
+
+/*a.btn.btn-light-primary.me-3 {*/
+/*    display: none;*/
+/*}*/

@@ -1,0 +1,275 @@
+@extends('layouts.app')
+@section('pageTitle')
+    Email Inspection Report
+@endsection
+@section('content')
+    <!--begin::Content-->
+    <div class="container-xxl" id="kt_content_container">
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            <!--begin::Container-->
+            <div class="container-xxl" id="kt_content_container">
+                <!--begin::Careers - Apply-->
+                <div class="card">
+                    <!--begin::Body-->
+                    <div class="card-body p-lg-17">
+                        <div style="float: left" class="position-relative mb-17">
+                            <h1>View Inspection Report</h1>
+                        </div>
+                        <div style="text-align: right" class="position-relative align-right mb-17">
+                            <a href="javascript:void(0);"
+                               onclick="openPopup('{{ url('/') }}/print_inspection_report/{{ $inspection_report->id }}')"
+                               class="btn btn-secondary"><i class="bi bi-printer fs-4 me-2"></i> Print</a>
+                        </div>
+                        <!--begin::Layout-->
+                        <div class="d-flex flex-column flex-lg-row mb-17">
+
+                            <!--begin::Content-->
+                            <div class="flex-lg-row-fluid me-0 me-lg-20">
+                                @if($errors->any())
+                                    <div class="alert alert-outline-danger alert-dismissible fade show" role="alert">
+                                        <ul class="list-group">
+                                            @foreach($errors->all() as $error)
+                                                <li class="list-group-item text-danger">
+                                                    {{$error}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @if(session()->has('success'))
+
+                                    <div class="alert alert-success" role="alert">
+                                        {{session()->get('success')}}
+                                    </div>
+
+                                @endif
+                                <!--begin::Form-->
+                                <form action="{{route('send_email_inspection_report')}}" enctype="multipart/form-data"
+                                      class="form mb-15" method="post">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$inspection_report->id}}">
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-5">
+                                        <!--begin::Col-->
+                                        <div class="col-md-12 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required fs-5 fw-semibold mb-2">Recipients</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <select class="form-select form-select-lg form-select-solid"
+                                                    data-control="select2" data-close-on-select="false"
+                                                    data-placeholder="Select an option" data-allow-clear="true"
+                                                    multiple="multiple" name="recipient[]">
+                                                <option value="" selected disabled></option>
+                                                @foreach($users as $user)
+                                                    <option
+                                                        value="{{$user->email}}">{{$user->first_name . " " . $user->last_name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-5">
+                                        <!--begin::Col-->
+                                        <div class="col-md-12 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="fs-5 fw-semibold mb-2">Add a personal message</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <textarea class="form-control form-control-solid" name="personal_message"
+                                                      id="personal_message" cols="30"
+                                                      rows="5"></textarea>
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Separator-->
+                                    <div class="separator mb-8"></div>
+                                    <!--end::Separator-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-5">
+
+                                        <!--begin::Col-->
+                                        <div class="col-md-12 col-md-12-cust fv-row">
+                                            <!--end::Label-->
+                                            <label class="required fs-5 fw-semibold mb-2">Site</label>
+                                            <!--end::Label-->
+                                            <!--end::Input-->
+                                            <select name="site" id="site" data-control="select2"
+                                                    data-placeholder="Select a position..."
+                                                    class="form-select form-select-solid">
+                                                @foreach($siteArr as $site)
+                                                    <option
+                                                        {{$inspection_report->site == $site ? 'selected' : ''}} value="{{$site}}">{{$site}}</option>
+                                                @endforeach
+                                            </select>
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8">
+                                        <label class="required fs-6 fw-semibold mb-2">Description</label>
+                                        <textarea class="form-control form-control-solid" rows="4" name="description"
+                                                  placeholder="" readonly>{{$inspection_report->description}}</textarea>
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <div class="row mb-5">
+
+                                        <!--begin::Col-->
+                                        <div class="col-md-12 col-md-12-cust fv-row">
+                                            <!--end::Label-->
+                                            <label class="required fs-5 fw-semibold mb-2">Report Type</label>
+                                            <!--end::Label-->
+                                            <!--end::Input-->
+                                            <select name="report_type" id="report_type" data-control="select2"
+                                                    data-placeholder="Select a position..."
+                                                    class="form-select form-select-solid">
+                                                @foreach($reportTypeArr as $reportType)
+                                                    <option
+                                                        {{$inspection_report->reportType == $reportType ? 'selected' : ''}} value="{{$reportType}}">{{$reportType}}</option>
+                                                @endforeach
+                                            </select>
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-5 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required fs-5 fw-semibold mb-2">Completion Date</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input type="date" class="form-control form-control-solid" placeholder=""
+                                               name="completion_date"
+                                               value="{{$inspection_report->completion_date}}" readonly/>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-md-12 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required fs-5 fw-semibold mb-2">Status</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <select id="status" name="status" data-control="select2"
+                                                data-placeholder="Select a Status..."
+                                                class="form-select form-select-solid">
+                                            @foreach($statusArr as $status)
+                                                <option
+                                                    {{$inspection_report->status == $status ? 'selected' : ''}} value="{{$status}}">{{$status}}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-5 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="fs-5 fw-semibold mb-2">Next Due Date</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input type="date" class="form-control form-control-solid" placeholder=""
+                                               name="next_due_date"
+                                               value="{{$inspection_report->next_due_date}}" readonly/>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8">
+                                        <label class="required fs-6 fw-semibold mb-2">Attachment 1</label>
+                                        <a class="mb-3" target="_blank"
+                                           href="{{asset('uploads/inspection_reports')}}/{{$inspection_report->attachment_1}}">{{$inspection_report->attachment_1}}</a>
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8">
+                                        <label class="fs-6 fw-semibold mb-2">Attachment 2 (If Any)</label>
+                                        <a class="mb-3" target="_blank"
+                                           href="{{asset('uploads/inspection_reports')}}/{{$inspection_report->attachment_2}}">{{$inspection_report->attachment_2}}</a>
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8">
+                                        <label class="fs-6 fw-semibold mb-2">Attachment 3 (If Any)</label>
+                                        <a class="mb-3" target="_blank"
+                                           href="{{asset('uploads/inspection_reports')}}/{{$inspection_report->attachment_3}}">{{$inspection_report->attachment_3}}</a>
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8">
+                                        <label class="fs-6 fw-semibold mb-2">Remarks</label>
+                                        <textarea class="form-control form-control-solid" rows="4" name="remarks"
+                                                  placeholder="" readonly>{{$inspection_report->remarks}}</textarea>
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Separator-->
+                                    <div class="separator mb-8"></div>
+                                    <!--end::Separator-->
+                                    <!--begin::Submit-->
+                                    <button type="submit" class="btn btn-primary" id="kt_careers_submit_button">
+                                        <span class="indicator-label">Send Email</span>
+                                    </button>
+                                    <!--end::Submit-->
+                                </form>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Content-->
+                        </div>
+                        <!--end::Layout-->
+
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Careers - Apply-->
+            </div>
+            <!--end::Container-->
+        </div>
+    </div>
+    <!--end::Content-->
+@endsection
+
+@section('scripts')
+    <script>
+        jQuery(document).ready(function ($) {
+            var $select2_1 = $('#site').select2();
+            var $select2_2 = $('#report_type').select2();
+            var $select2_3 = $('#status').select2();
+
+            $select2_1.prop('disabled', true);
+            $select2_2.prop('disabled', true);
+            $select2_3.prop('disabled', true);
+
+            $select2_1.on("select2:opening select2:closing", function (e) {
+                e.preventDefault();
+            });
+            $select2_2.on("select2:opening select2:closing", function (e) {
+                e.preventDefault();
+            });
+            $select2_3.on("select2:opening select2:closing", function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+
+@endsection

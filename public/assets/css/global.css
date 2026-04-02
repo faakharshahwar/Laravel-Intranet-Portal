@@ -1,0 +1,258 @@
+body {
+    background-color: #ffffff;
+}
+
+em {
+    font-size: 12px;
+    color: #ce0309;
+}
+
+#cp-logo img {
+    width: 100%;
+}
+
+#login-link{
+   color: #2990ff!important;
+}
+
+.submit-button {
+    background-color: #2990ff !important;
+}
+
+.submit-button:hover {
+    background-color: #2990ff !important;
+}
+
+.btn.btn-primary:hover:not(.btn-active) {
+    background-color: #0f5cf5 !important;
+}
+
+.dashboard-heading span {
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 12px;
+}
+
+.dashboard-button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: normal !important;
+}
+
+.dashboard-button-container .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: white;
+    background-color: #42a5f5;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-button-container .btn:hover {
+    background-color: #1e88e5;
+}
+
+.dashboard-button-container .btn:active {
+    background-color: #1976d2;
+}
+
+.key-databases-button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: normal !important;
+}
+
+.key-databases-button-container .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: black;
+    background-color: #e3f2fd;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.key-databases-button-container .btn-long {
+    min-width: 200px;
+}
+
+.key-databases-button-container .btn:hover {
+    background-color: #bbdefb;
+}
+
+.key-databases-button-container .btn:active {
+    background-color: #90caf9;
+}
+
+.home-icon i {
+    font-size: 18px;
+    color: #4a4d53;
+}
+
+.app-name {
+    font-size: 16px;
+}
+
+.app-settings {
+    margin-right: 25px;
+}
+
+.app-settings i {
+    font-size: 18px;
+    color: #4a4d53;
+}
+
+.menu-link i {
+    color: #4a4d53;
+}
+
+.menu-link span {
+    color: #4a4d53 !important;
+}
+
+.sub-header {
+    height: 45px;
+}
+
+.sub-header h1 {
+    font-size: 16px;
+    padding: 13px 4%;
+}
+
+.menu-icons-sub-header {
+    box-shadow: 0 4px 2px -1px #f5f5f5;
+    height: 60px;
+}
+
+.menu-icons-sub-header h1 {
+    padding: 15px 33px;
+}
+
+.menu-nav-items {
+    background-color: #F5F5F5;
+}
+
+.btn.btn-active-success.active {
+    background-color: #FEFEFE !important;
+    color: #000000;
+}
+
+.btn.btn-active-success.active i {
+    font-size: 16px;
+    color: #000000;
+}
+
+.btn.btn-active-success i {
+    font-size: 16px;
+    color: #000000;
+}
+
+.btn.btn-active-success:active:not(.btn-active), .btn.btn-active-success:focus:not(.btn-active) {
+    background-color: #FEFEFE !important;
+    color: #000000;
+}
+
+.btn.btn-active-success:active:not(.btn-active) i, .btn.btn-active-success:focus:not(.btn-active) i {
+    color: #000000;
+}
+
+.btn.btn-active-success:hover:not(.btn-active) {
+    background-color: #FEFEFE !important;
+    color: #000000;
+}
+
+.btn.btn-active-success:hover:not(.btn-active) i {
+    color: #000000;
+}
+
+th {
+    background-color: grey !important;
+    border-left: 1px solid white !important;
+    color: #ffffff !important;
+    padding: 10px !important;
+}
+
+
+@media (min-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 1800px;
+    }
+}
+
+@media (min-width: 992px) {
+    .header {
+        background-color: #D3DFED;
+    }
+
+    .header-fixed .wrapper {
+        padding-top: 0;
+    }
+
+    .wrapper {
+        padding-left: 0;
+    }
+
+    .header-fixed .header {
+        position: unset;
+        height: 60px;
+    }
+}
+
+.col-md-12-cust {
+    margin-bottom: 15px;
+}
+
+.table.gy-4 td {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    color: #7e8299;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    transition: color .2s ease;
+    background-color: var(--kt-primary-light);
+    color: var(--kt-primary);
+}
+
+.reset-option-link {
+    font-size: 0.875rem;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.reset-option-link:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.table-responsive {
+    overflow: visible !important;
+}
+
+.table-responsive .dropdown {
+    position: static !important;
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    z-index: 1050;
+}
+
+.status-message {
+    padding: 10px;
+}
